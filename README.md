@@ -1,5 +1,7 @@
 # The Minimal Demo for Plotters + WASM
 
+This demo has been deployed at this [link](https://plotters-rs.github.io/wasm-demo/www/index.html).
+
 To build the demo you need [wasm-pack](https://rustwasm.github.io/docs/book/game-of-life/setup.html).
 
 Then you can run it locally either using `npm` and `webpack-dev-server` or
