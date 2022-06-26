@@ -1,6 +1,10 @@
-# The Minimal Demo for Plotters + WASM
+# Example Project of Plotters + WASM
 
-This demo has been deployed at this [link](https://plotters-rs.github.io/wasm-demo/www/index.html).
+This is a minimal project that uses Plotters in WASM application.
+
+- For more information about Plotters project, check our [core repository](https://github.com/plotters-rs/plotters).
+
+- This demo has been deployed at this [link](https://plotters-rs.github.io/wasm-demo/www/index.html).
 
 ## Try this example locally
 
