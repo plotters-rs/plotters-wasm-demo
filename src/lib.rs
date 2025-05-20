@@ -5,8 +5,13 @@ mod func_plot;
 mod mandelbrot;
 mod plot3d;
 
+#[cfg(target_arch = "wasm32")]
+use lol_alloc::{FreeListAllocator, LockedAllocator};
+
+#[cfg(target_arch = "wasm32")]
 #[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+static ALLOCATOR: LockedAllocator<FreeListAllocator> =
+    LockedAllocator::new(FreeListAllocator::new());
 
 /// Type alias for the result of a drawing function.
 pub type DrawResult<T> = Result<T, Box<dyn std::error::Error>>;
@@ -29,10 +34,10 @@ pub struct Point {
 impl Chart {
     /// Draw provided power function on the canvas element using it's id.
     /// Return `Chart` struct suitable for coordinate conversion.
-    pub fn power(canvas_id: &str, power: i32) -> Result<Chart, JsValue> {
+    pub fn power(canvas_id: String, power: i32) -> Result<Chart, JsValue> {
         let map_coord = func_plot::draw(canvas_id, power).map_err(|err| err.to_string())?;
         Ok(Chart {
-            convert: Box::new(move |coord| map_coord(coord).map(|(x, y)| (x.into(), y.into()))),
+            convert: Box::new(map_coord),
         })
     }
 
