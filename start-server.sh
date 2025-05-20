@@ -2,7 +2,6 @@
 set -e
 
 CONFIG=release
-mkdir -p www/pkg
 
 rustup target add wasm32-unknown-unknown
 
@@ -13,9 +12,9 @@ fi
 
 if [ "${CONFIG}" = "release" ]
 then
-    wasm-pack build
+    wasm-pack build --target web
 else 
-    wasm-pack build --release
+    wasm-pack build --release --target web
 fi
 
 cd www
